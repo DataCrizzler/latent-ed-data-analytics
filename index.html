@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Modern Data Analytics | Latent Ed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #030712;
+            --bg-card: #0F172A; 
+            --accent: #10b981; 
+            --accent-dark: #059669;
+            --secondary: #3b82f6; 
+            --text-main: #f9fafb;
+            --text-dim: #9ca3af;
+            --border: #1f2937;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: white;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-deep);
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: radial-gradient(circle at top right, #111827 0%, #030712 100%);
+            padding: 6rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .hero-form {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .hero-form h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 3vw, 2.75rem);
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Key Takeaways */
+        .takeaways-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .takeaway-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .takeaway-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .takeaway-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .takeaway-card h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .takeaway-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Who This Is For */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .audience-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .audience-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .audience-card p {
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+        /* Programme Highlights */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .highlight-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .highlight-item .icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .highlight-item h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .highlight-item p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Curriculum */
+        .curriculum-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .curriculum-week {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .week-number {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .week-content h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .week-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .week-content li {
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .week-content li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .milestone {
+            grid-column: 1 / -1;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px dashed var(--accent);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .milestone strong {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-text {
+            color: var(--text-dim);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--bg-deep);
+        }
+
+        .author-info h5 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* Enrollment CTA */
+        .enrollment-cta {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 4rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .enrollment-cta h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .enrollment-cta .price {
+            font-size: 4rem;
+            color: var(--accent);
+            font-weight: 800;
+            margin: 2rem 0;
+        }
+
+        .enrollment-details {
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: left;
+        }
+
+        .enrollment-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .enrollment-details li {
+            color: var(--text-dim);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .enrollment-details li:last-child {
+            border-bottom: none;
+        }
+
+        .enrollment-details strong {
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .curriculum-week {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">LATENT <span style="color: var(--accent);">ED</span></div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#curriculum">Curriculum</a>
+                <a href="#enrollment">Enrollment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Master Modern <span style="color: var(--accent);">Data Analytics</span></h1>
+                <p class="subtitle">Build in-demand analytics skills to propel your career. Master Excel, Power BI, SQL, and Python in this comprehensive 12-week programme.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>12 Weeks</h3>
+                        <p>Intensive practical training</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>£500</h3>
+                        <p>Total programme fee</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4 Tools</h3>
+                        <p>Industry-standard platforms</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Takeaways -->
+    <div class="container">
+        <section class="section" id="about">
+            <div class="section-header">
+                <h2>What You Will Learn</h2>
+                <p>This hands-on programme is meticulously crafted to equip you with practical skills in modern-day analytics, enabling you to tackle real-world business challenges effectively.</p>
+            </div>
+
+            <div class="takeaways-grid">
+                <div class="takeaway-card">
+                    <div class="icon">📊</div>
+                    <h4>Master Data Analysis Fundamentals</h4>
+                    <p>Build a strong foundation in Excel for data cleaning, analysis, and visualization using advanced formulas and pivot tables.</p>
+                </div>
+                <div class="takeaway-card">
+                    <div class="icon">📈</div>
+                    <h4>Create Interactive Dashboards</h4>
+                    <p>Design and publish professional Power BI dashboards with DAX measures and compelling data visualizations.</p>
+                </div>
+                <div class="takeaway-card">
+                    <div class="icon">🗄️</div>
+                    <h4>Query Databases with SQL</h4>
+                    <p>Write complex SQL queries using joins, window functions, and CTEs to extract meaningful insights from large datasets.</p>
+                </div>
+                <div class="takeaway-card">
+                    <div class="icon">🐍</div>
+                    <h4>Automate with Python</h4>
+                    <p>Learn Python fundamentals and use Pandas to manipulate data and automate repetitive analytics tasks.</p>
+                </div>
+                <div class="takeaway-card">
+                    <div class="icon">💼</div>
+                    <h4>Build Your Portfolio</h4>
+                    <p>Complete real-world projects and build a comprehensive portfolio to showcase your analytics expertise to employers.</p>
+                </div>
+                <div class="takeaway-card">
+                    <div class="icon">🎯</div>
+                    <h4>Apply Industry Best Practices</h4>
+                    <p>Learn data visualization principles, dashboard design, and effective communication of insights to stakeholders.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who This Is For -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Who Is This Programme For?</h2>
+                <p>This programme is designed for aspiring data professionals and business professionals looking to enhance their analytical capabilities.</p>
+            </div>
+
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <h3>Career Changers</h3>
+                    <p>Professionals from any background looking to transition into data analytics and build a strong foundation in the most sought-after tools and techniques.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Business Professionals</h3>
+                    <p>Marketing managers, sales analysts, operations specialists, and other business professionals who want to make data-driven decisions and improve business outcomes.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Recent Graduates</h3>
+                    <p>Recent graduates from any discipline who want to launch their career in data analytics with practical, hands-on experience in industry-standard tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Programme Requirements</h2>
+                <p>What you need to get started on your data analytics journey.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1000px; margin: 0 auto;">
+                <div>
+                    <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;">Prerequisites</h3>
+                    <div style="background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border);">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Basic mathematics understanding (addition, subtraction, multiplication, division)
+                            </li>
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Ability to read and write in English
+                            </li>
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Basic computer literacy (file management, web browsing)
+                            </li>
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Commitment to attend live sessions and complete assignments
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-size: 1.3rem;">Technical Requirements</h3>
+                    <div style="background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border);">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Laptop or desktop computer (Windows 10+ or macOS)
+                            </li>
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Minimum 8GB RAM (16GB recommended)
+                            </li>
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Reliable internet connection (minimum 10 Mbps)
+                            </li>
+                            <li style="color: var(--text-dim); margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: var(--accent); font-weight: bold;">✓</span>
+                                Webcam and microphone for interactive sessions
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programme Highlights -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Programme Highlights</h2>
+            </div>
+
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <div class="icon">🎓</div>
+                    <h4>Expert Instruction</h4>
+                    <p>Learn from experienced data professionals with real-world industry expertise</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="icon">💻</div>
+                    <h4>Hands-On Learning</h4>
+                    <p>70% practical application with real datasets and business scenarios</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="icon">🏆</div>
+                    <h4>Portfolio Projects</h4>
+                    <p>Build 3+ complete projects to showcase your skills to employers</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="icon">👥</div>
+                    <h4>Personal Mentorship</h4>
+                    <p>One-on-one mentorship sessions to guide your learning journey and career development</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="icon">📄</div>
+                    <h4>CV Preparation</h4>
+                    <p>Professional CV reviews and optimization to help you stand out to employers</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="icon">⏰</div>
+                    <h4>Flexible Schedule</h4>
+                    <p>2 sessions per week (2.5 hours each) designed for working professionals</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="icon">🤝</div>
+                    <h4>Ongoing Support</h4>
+                    <p>Weekly office hours for Q&A, code reviews, and personalized guidance</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="icon">📜</div>
+                    <h4>Career Ready</h4>
+                    <p>Graduate with job-ready skills and a portfolio to showcase to employers</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum -->
+        <section class="section" id="curriculum">
+            <div class="section-header">
+                <h2>Curriculum Overview</h2>
+                <p>A comprehensive 12-week journey through the essential tools and techniques of data analytics.</p>
+            </div>
+
+            <div class="curriculum-list">
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 01</div>
+                    <div class="week-content">
+                        <h3>Introduction to Data Analytics & Excel Fundamentals</h3>
+                        <ul>
+                            <li>The Data Analytics Lifecycle</li>
+                            <li>Data Types & Data Quality</li>
+                            <li>Basic Excel Functions and Formulas</li>
+                            <li>Data Cleaning & Preparation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 02</div>
+                    <div class="week-content">
+                        <h3>Advanced Excel for Analytics</h3>
+                        <ul>
+                            <li>Advanced Formulas: VLOOKUP, INDEX-MATCH, XLOOKUP</li>
+                            <li>Pivot Tables and Pivot Charts</li>
+                            <li>Data Validation & Conditional Formatting</li>
+                            <li>Creating Interactive Dashboards in Excel</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <span style="font-size: 1.5rem;">📊</span> <strong>Milestone:</strong> Your first Excel analytics dashboard
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 03</div>
+                    <div class="week-content">
+                        <h3>Power BI Fundamentals & Data Visualization</h3>
+                        <ul>
+                            <li>Power BI Desktop Interface</li>
+                            <li>Connecting to Data Sources</li>
+                            <li>Choosing the Right Chart Type</li>
+                            <li>Dashboard Design Best Practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 04</div>
+                    <div class="week-content">
+                        <h3>Power Query for Data Transformation</h3>
+                        <ul>
+                            <li>Power Query Editor</li>
+                            <li>Data Cleaning & Shaping</li>
+                            <li>Merging and Appending Queries</li>
+                            <li>Creating Custom Columns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 05</div>
+                    <div class="week-content">
+                        <h3>DAX & Data Modeling</h3>
+                        <ul>
+                            <li>Introduction to DAX (Data Analysis Expressions)</li>
+                            <li>Calculated Columns vs. Measures</li>
+                            <li>Star Schema & Relationships</li>
+                            <li>Time Intelligence Functions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 06</div>
+                    <div class="week-content">
+                        <h3>Advanced Power BI & Publishing</h3>
+                        <ul>
+                            <li>Advanced Visualizations & Custom Visuals</li>
+                            <li>Parameters and What-If Analysis</li>
+                            <li>Row-Level Security</li>
+                            <li>Publishing to Power BI Service</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <span style="font-size: 1.5rem;">📈</span> <strong>Milestone:</strong> A professional Power BI dashboard published online
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 07</div>
+                    <div class="week-content">
+                        <h3>SQL Fundamentals for Data Analysis</h3>
+                        <ul>
+                            <li>SELECT, WHERE, and Basic Filtering</li>
+                            <li>GROUP BY and Aggregations (SUM, AVG, COUNT)</li>
+                            <li>Sorting and Limiting Results</li>
+                            <li>JOINs: Inner, Left, Right, Full Outer</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 08</div>
+                    <div class="week-content">
+                        <h3>Advanced SQL Techniques</h3>
+                        <ul>
+                            <li>Subqueries and CTEs</li>
+                            <li>Window Functions (ROW_NUMBER, RANK, LAG, LEAD)</li>
+                            <li>Date and Time Functions</li>
+                            <li>Query Performance Best Practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <span style="font-size: 1.5rem;">🗄️</span> <strong>Milestone:</strong> A comprehensive SQL analytics report
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 09</div>
+                    <div class="week-content">
+                        <h3>Python Fundamentals for Analytics</h3>
+                        <ul>
+                            <li>Python Basics: Variables, Data Types, Loops</li>
+                            <li>Working with Lists and Dictionaries</li>
+                            <li>Introduction to Pandas for Data Manipulation</li>
+                            <li>Reading and Writing CSV/Excel Files</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="curriculum-week">
+                    <div class="week-number">WEEK 10</div>
+                    <div class="week-content">
+                        <h3>Capstone Project & Portfolio Development</h3>
+                        <ul>
+                            <li>End-to-end analytics project combining Excel, Power BI, SQL</li>
+                            <li>Portfolio presentation best practices</li>
+                            <li>GitHub for analytics portfolios</li>
+                            <li>Final project showcase and peer review</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="milestone">
+                    <span style="font-size: 1.5rem;">🎯</span> <strong>Milestone:</strong> Complete analytics portfolio showcasing all your skills
+                </div>
+            </div>
+        </section>
+
+        <!-- Enrollment CTA -->
+        <section class="section" id="enrollment">
+            <div class="enrollment-cta">
+                <h2>Ready to Transform Your Career?</h2>
+                <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 2rem;">Join our next cohort and build the skills employers are looking for</p>
+                
+                <div class="price">£500</div>
+                
+                <div class="enrollment-details">
+                    <ul>
+                        <li>
+                            <span>Duration</span>
+                            <strong>12 Weeks</strong>
+                        </li>
+                        <li>
+                            <span>Schedule</span>
+                            <strong>2x per week (2.5 hours)</strong>
+                        </li>
+                        <li>
+                            <span>Format</span>
+                            <strong>Live Online Sessions</strong>
+                        </li>
+                        <li>
+                            <span>Class Size</span>
+                            <strong>Limited to 20 students</strong>
+                        </li>
+                        <li>
+                            <span>Career Support</span>
+                            <strong>Mentorship & CV Prep Included</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="#enrollment" class="btn-primary" style="margin-top: 2rem; padding: 1.25rem 3rem; font-size: 1.1rem;">SECURE YOUR SEAT</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Latent Ed. All rights reserved. | Data Analytics Programme</p>
+    </footer>
+
+</body>
+</html>
